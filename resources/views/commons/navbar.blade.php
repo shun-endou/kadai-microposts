@@ -16,12 +16,16 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- ユーザ詳細ページへのリンク --}}
+                            {{-- Myprofileへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('users.show', 'My profile', ['user' => Auth::id()]) !!}</li>
+                            {{-- お気に入りへのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('users.favorites', 'Favorite',['id' => Auth::id()]) !!}</li>
                                 <li class="dropdown-divider"></li>
+                                
                                 {{-- ログアウトへのリンク --}}
                                 <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
-                            </ul>
+                                
+                        </ul>
                     </li>
                 @else
                     {{-- ユーザ登録ページへのリンク --}}

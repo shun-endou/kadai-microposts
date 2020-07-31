@@ -9,18 +9,26 @@
                         {{-- 投稿の所有者のユーザ詳細ページへのリンク --}}
                         {!! link_to_route('users.show', $micropost->user->name, ['user' => $micropost->user->id]) !!}
                         <span class="text-muted">posted at {{ $micropost->created_at }}</span>
+
                     </div>
                     <div>
                         {{-- 投稿内容 --}}
                         <p class="mb-0">{!! nl2br(e($micropost->content)) !!}</p>
                     </div>
-                    <div>
+                    
+                    <div class="d-flex justify-content-start">
+                        <div class=text-center>
+                               {{-- favorite／unfavoriteボタン --}}
+                               @include('user_favorites.favorites_button')
+                        </div>
+                        <div>
                         @if (Auth::id() == $micropost->user_id)
                             {{-- 投稿削除ボタンのフォーム --}}
                             {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         @endif
+                        </div>
                     </div>
                 </div>
             </li>
