@@ -152,10 +152,9 @@ class User extends Authenticatable
     public function favorite($micropostId){
         // すでにいいねしているかの確認
         $exist = $this->is_favorite($micropostId);
-        // 相手が自分自身かどうかの確認
-        $its_me = $this->id == $micropostId;
 
-        if ($exist || $its_me) {
+
+        if ($exist) {
             // すでにいいねしていれば何もしない
             return false;
         } else {
@@ -167,10 +166,9 @@ class User extends Authenticatable
     public function unfavorite($micropostId){
         // すでにいいねしているかの確認
         $exist = $this->is_favorite($micropostId);
-        // 相手が自分自身かどうかの確認
-        $its_me = $this->id == $micropostId;
 
-        if ($exist && !$its_me) {
+
+        if ($exist) {
             // すでにいいねしていればいいねを外す
             $this->favorites()->detach($micropostId);
             return true;
